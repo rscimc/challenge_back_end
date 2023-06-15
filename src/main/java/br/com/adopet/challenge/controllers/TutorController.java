@@ -1,9 +1,15 @@
 package br.com.adopet.challenge.controllers;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,10 +23,30 @@ public class TutorController {
     @Autowired
     private TutorRepository tutorRepository;
 
+    @PostMapping
+    public void createTutor(@RequestBody Tutor tutor) {
+        tutorRepository.save(tutor);
+    }
+
     @GetMapping
-    public List<Tutor> getObjects() {
+    public List<Tutor> readTutores() {
         List <Tutor> list = tutorRepository.findAll();
 
         return list;
     }
+
+    @GetMapping("/{id}")
+    public Optional<Tutor> readTutor(@PathVariable Long id) {
+        return tutorRepository.findById(id);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteTutor(@PathVariable Long id) {
+        tutorRepository.deleteById(id);
+    }
+
+    @PutMapping
+    public void upDateTutor(@RequestBody Tutor tutor) {
+    tutorRepository.save(tutor);
+}
 }

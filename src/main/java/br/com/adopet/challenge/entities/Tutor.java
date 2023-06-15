@@ -83,7 +83,5 @@ public class Tutor {
 
     public void setSobre(String sobre) {
         this.sobre = sobre;
-    }
-    
-    
+    }    
 }
